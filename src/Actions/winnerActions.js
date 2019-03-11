@@ -13,8 +13,8 @@ const toastrOptions = {
 
 export const ADD_WINNERS_BY_WEEK = 'winners: addWinnersByWeekAction';
 export const MAIL_WINNERS = 'winners: mailWinnersAction';
-export const WINNERS_VALIDATED = 'WINNERS_VALIDATED thunk';
-export const ADD_PARTICIPATION = 'addParticipationThunk';
+export const WINNERS_VALIDATED = 'WINNERS_VALIDATED action';
+// export const ADD_PARTICIPATION = 'addParticipationAction';
 
 const winnersSelected = users => {
   return {
@@ -35,41 +35,41 @@ const winnersValidated = (emails) => {
 };
 
 //déclaration action qui va incréménter ma base de donnée
-export const addParticipationAction = (data) => {
-  return {
-    type: ADD_PARTICIPATION,
-    payload: {
-      participation: data.participation,
-    },
-  };
-};
+// export const addParticipationAction = (data) => {
+//   return {
+//     type: ADD_PARTICIPATION,
+//     payload: {
+//       participation: data.participation,
+//     },
+//   };
+// };
 
-export const addParticipationThunk = () => {
-  return (dispatch, getState) => {
-    console.log(getState())
-    return axios
-      .put(apiUrl, [23, 34, 24])
-      .then(response => {
-        console.log(response);
-        // dispatch(addParticipationAction(response.data));
-      })
-      .catch(error => {
-        throw error;
-      });
-  };
-};
+// export const addParticipationThunk = () => {
+//   return (dispatch, getState) => {
+//     console.log(getState())
+//     return axios
+//       .put(apiUrl, [{userId}])
+//       .then(response => {
+//         console.log(response);
+//         dispatch(addParticipationAction(response.data));
+//       })
+//       .catch(error => {
+//         throw error;
+//       });
+//   };
+// };
 
 
-export const selectWinnersThunk = (sampleCount=3) => {
+export const selectWinnersAction = (sampleCount=3) => {
   return (dispatch, getState) => {
     console.log(sampleCount)
     const users = getState().usersNotSelected;
-    const sampled = underscore.sample(users,  sampleCount);
+    const sampled = underscore.sample(users, sampleCount);
     dispatch(winnersSelected(sampled));
   };
 };
 
-export const validateWinnersThunk = () => {
+export const validateWinnersAction = () => {
   return (dispatch, getState) => {
     
     //getState fonction qui permet d'accéder au state

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import './Winners.scss';
 
-import { validateWinnersAction, selectWinnersAction, addParticipationAction } from '../Actions/winnerActions';
+import { validateWinnersAction, selectWinnersAction } from '../Actions/winnerActions';
 
 class Winners extends Component {
   constructor() {
@@ -30,7 +30,7 @@ class Winners extends Component {
   
   onValidateWinner = () => {
     this.props.validateWinners();
-    this.props.addParticipation();
+    // this.props.addParticipation();
   }
   
     render() {
@@ -67,7 +67,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   selectNewWinners: selectWinnersAction,
   validateWinners: validateWinnersAction,
-  addParticipation: addParticipationAction,
+  // addParticipation: addParticipationAction,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps )(Winners);

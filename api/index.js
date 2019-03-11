@@ -107,17 +107,17 @@ app.post('/users', function (req, res) {
     }); 
 })    
 
-//Increment column /participation
-app.put('/users/:userId', (req, res) => {
-  console.log("it's ok")
-  const addParticipation = `PUT users SET participation = 'participation + 1' = WHERE id="${req.params.userId}"`
-  connection.query(put, function (err, result) {
-    if(!err)
-    res.send('Add successfully')
-    else 
-    console.log(err);
-  });
-});
+// //Increment column /participation
+// app.update('/users/:userId', (req, res) => {
+//   console.log("it's ok")
+//   const addParticipation = `UPDATE users SET participation = 'participation + 1' = WHERE id="${req.params.userId}"`
+//   connection.query(update, function (err, result) {
+//     if(!err)
+//     res.send('Add successfully')
+//     else 
+//     console.log(err);
+//   });
+// });
 
 connection.connect(function(err) {
     if (err) throw err;
