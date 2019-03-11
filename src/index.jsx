@@ -4,16 +4,33 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import  { createStore, applyMiddleware, compose } from 'redux';
+import  {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers
+} from 'redux';
+import { reducer as toastrReducer } from 'react-redux-toastr';
+import ReduxToastr from 'react-redux-toastr';
 import thunk from 'redux-thunk';
-import rootReducer from './Reducers/index';
-import ReduxToastr from 'react-redux-toastr'
+
+import { userReducer } from './Reducers/userReducer';
+import { winnerReducer } from './Reducers/winnerReducer';
+import { usersNotSelectedReducer } from './Reducers/usersNotSelectedReducer';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const rootReducer = combineReducers({
+  users: userReducer,
+  toastr: toastrReducer,
+  winnersByWeek: winnerReducer,
+  usersNotSelected: usersNotSelectedReducer,
+});
+
 const store = createStore(
   rootReducer,
   composeEnhancer(applyMiddleware(thunk))
 );
+
 
 ReactDOM.render(
   <Provider store={store}>

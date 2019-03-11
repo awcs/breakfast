@@ -3,7 +3,7 @@ import { WINNERS_VALIDATED, MAIL_WINNERS } from '../Actions/winnerActions';
 
 const initialState = [];
 
-export default (state = initialState, action) => {
+export const winnerReducer = (state = initialState, action) => {
   switch (action.type) {
     case MAIL_WINNERS:
       return [
@@ -24,5 +24,5 @@ export default (state = initialState, action) => {
     //   return [...state,action.payload]
     default:
       return state;
-    }
-  };
+  }
+};

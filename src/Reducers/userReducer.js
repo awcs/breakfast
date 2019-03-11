@@ -2,7 +2,7 @@ import { SEND, DELETE_USER, ADD_USER } from '../Actions/userActions';
 
 const initialState = [];
 
-export default (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER:
       return [...state, action.payload];

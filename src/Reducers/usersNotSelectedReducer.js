@@ -3,7 +3,7 @@ import { WINNERS_VALIDATED } from '../Actions/winnerActions';
 
 const initialState = [];
 
-export default (state = initialState, action) => {
+export const usersNotSelectedReducer = (state = initialState, action) => {
   switch (action.type) { 
     case SEND:
       return [...action.payload.users];

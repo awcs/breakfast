@@ -60,9 +60,8 @@ const winnersValidated = (emails) => {
 // };
 
 
-export const selectWinnersAction = (sampleCount=3) => {
+export const selectWinnersAction = (sampleCount) => {
   return (dispatch, getState) => {
-    console.log(sampleCount)
     const users = getState().usersNotSelected;
     const sampled = underscore.sample(users, sampleCount);
     dispatch(winnersSelected(sampled));

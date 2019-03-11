@@ -30,7 +30,7 @@ app.all('/*', function(req, res, next){
 let connection = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "jecode4wcs",
+    password: "<linuX>1990",
     database: "breakfast"
 });
 
@@ -47,9 +47,9 @@ app.post('/users', function (req, res) {
   const insert = `INSERT INTO users ( nom_prenom, email) values ('${req.body.nom_prenom}', '${req.body.email}')`
     connection.query(insert, function (err, result) {
           if(err) {
-            console.log('mysql error', error);
+            console.log('mysql error', err);
             res.status(500);
-            res.send(error);
+            res.send(err);
           } else {
               console.log('mysql success', result);
               var mailOptions = {
@@ -95,16 +95,18 @@ app.post('/users', function (req, res) {
       text: 'That was easy!'
     };
     
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-        res.status(500);
-        res.send(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-        res.send('Email sent: ' + info.response);
-      }
-    }); 
+    res.status(200);
+    res.end();
+    // transporter.sendMail(mailOptions, function(error, info){
+    //   if (error) {
+    //     console.log(error);
+    //     res.status(500);
+    //     res.send(error);
+    //   } else {
+    //     console.log('Email sent: ' + info.response);
+    //     res.send('Email sent: ' + info.response);
+    //   }
+    // }); 
 })    
 
 // //Increment column /participation
@@ -127,4 +129,3 @@ connection.connect(function(err) {
 app.listen(port, function() {
     console.log(`server is up on port ${port}!`);
 })
-
