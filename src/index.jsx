@@ -18,6 +18,10 @@ import { userReducer } from './Reducers/userReducer';
 import { winnerReducer } from './Reducers/winnerReducer';
 import { usersNotSelectedReducer } from './Reducers/usersNotSelectedReducer';
 
+/**
+ * jai refais la disposition de ton store, 
+ * pour moi ça ne servait a rien de seéparer ton root reducer du reste vu sa taille 
+ * */
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   users: userReducer,

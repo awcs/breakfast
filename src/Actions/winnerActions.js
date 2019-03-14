@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { toastr } from 'react-redux-toastr';
 import underscore from 'underscore';
+import { dispatchUsersAction } from './userActions';
 
 const apiSendUsersUrl = 'http://localhost:6998/send';
 const apiUrl = 'http://localhost:6998/users';
 
+/** même chose ça va dans utils */
 const toastrOptions = {
   timeOut: 3000,
   onCloseButtonClick: () => console.log('Close button was clicked'),
@@ -62,6 +64,18 @@ const winnersValidated = (emails) => {
 
 export const selectWinnersAction = (sampleCount) => {
   return (dispatch, getState) => {
+    console.log(getState())
+    if (getState().usersNotSelected.length < sampleCount && getState().usersNotSelected.length > 0) {
+      sampleCount = getState().usersNotSelected.length
+    } else if (getState().usersNotSelected.length === 0 ) {
+      axios.get('http://localhost:6998/users')
+      .then((res) => {
+        dispatch(dispatchUsersAction(res.data));
+      })
+      .catch((err) => {
+        throw new Error(`get users failed: ${err}`)
+      })
+    }
     const users = getState().usersNotSelected;
     const sampled = underscore.sample(users, sampleCount);
     dispatch(winnersSelected(sampled));
@@ -73,6 +87,18 @@ export const validateWinnersAction = () => {
     
     //getState fonction qui permet d'accéder au state
     const state = getState();
+    /** bon la c'est pareil l'indentation de la condition ternaire la rend illisible donc :
+     * 
+     * const winners = state.winnersByWeek.length > 0 ?
+     * state.winnersByWeek[state.winnersByWeek.length - 1].winners : [];
+     * 
+     * ou 
+     * 
+     * const winners = state.winnersByWeek.length > 0 ?
+     * state.winnersByWeek[state.winnersByWeek.length - 1].winners
+     * : 
+     * [];
+     */
     const winners =
       state.winnersByWeek.length > 0
       

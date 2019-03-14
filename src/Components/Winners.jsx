@@ -4,6 +4,7 @@ import './Winners.scss';
 
 import { validateWinnersAction, selectWinnersAction } from '../Actions/winnerActions';
 
+/** choisis une indentation a 2, 4 c'est vraiment trop  */
 class Winners extends Component {
   constructor() {
     super(); 
@@ -43,6 +44,7 @@ class Winners extends Component {
                 </fieldset>
               </form> 
              <h2 className="c-winners__subtitle">Et les gagnants sont ...</h2> 
+              {/** je ne connais pas du tout cette syntaxe du "!!" ?? */}
                   {!!this.props.winnersContainer && this.props.winnersContainer.winners.map(winner => (
                     <div key={winner.id}>  
                         <div className="c-winners__input">

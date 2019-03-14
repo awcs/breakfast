@@ -6,7 +6,7 @@ export const SEND = 'app: dispatchUsersAction';
 export const ADD_USER = 'users: addUsersAction';
 export const DELETE_USER = 'users: deleteUserAction'
 
-
+/** rien a dire sur ce fichier il est niquel a par peut etre le const qui se balade au dessus des exports mais rien de grave  */
 export const dispatchUsersAction = users => {
   console.log(users);
   return {

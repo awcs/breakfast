@@ -5,21 +5,25 @@ import AddUser from './AddUser';
 
 import { deleteUserAction, dispatchUsersAction } from '../Actions/userActions';
 
-
+/** meme chose que dans AddUser, va dans utils */
 function searchingFor(term){
   return function(x){
     return x.nom_prenom.toLowerCase().includes(term.toLowerCase()) || ! term;
   }
 }
 
+/** INDENTATION !! C'est le mega bordel dans ce composant :)*/
 class Users extends Component {
     constructor() {
         super();
         this.state = {
           term:'',
         }
+        /** pas besoin de mettre de bind(this) si tu transformes searchHandler en une fonction fléchée  */
         this.searchHandler = this.searchHandler.bind(this);
     }
+
+    /** POINTS VIRGULES un peu partout, a la fin de tes setState en particulier  */
   
     searchHandler(event){
       this.setState({term:event.target.value}
@@ -30,6 +34,7 @@ class Users extends Component {
     }
 
     render() {
+      /** pourquoi cette syntaxe ? */
       const{term} = this.state;
 
       let filteredList = this.props.users.filter(searchingFor(term));

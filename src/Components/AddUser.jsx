@@ -6,6 +6,10 @@ import {toastr} from 'react-redux-toastr'
 
 import { addUsersAction } from '../Actions/userActions';
 
+/** quand tu as des fonctions comme ça, creer plutot un fichier utils 
+ * dans lequel tu mets toutes fonctions utilitaires qui se baladent 
+ * Tu pourras l'export depuis utils et l'import directement ici
+ *  */
 const toastrOptions = {
   timeOut: 3000, // by setting to 0 it will prevent the auto close
   onCloseButtonClick: () => console.log('Close button was clicked'),
@@ -16,6 +20,7 @@ class Adduser extends Component {
   constructor(){
     super();
     this.state = {
+      /** privilégie plutot le CamelCase ex: fullName et pas de français  */
       nom_prenom:"",
       email:"",
     }
@@ -28,10 +33,20 @@ class Adduser extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    /** separe bien ici (this.state, this.state.email) */
     this.props.addUsers(this.state,this.state.email)
     toastr.success('Confirmation', 'Un mail a bien été envoyé au nouvel inscrit', toastrOptions)
   }
 
+  /** quand tu as des if sur plusieurs niveaux indente les biens 
+   * if(
+   *    condition1 &&
+   *    condition2 ||
+   *    condition3
+   *    ) {
+   *    ton code...
+   *    }
+   */
   render() {
       if(this.state.email.length > 0 &&
         this.state.nom_prenom.length > 0) {

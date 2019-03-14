@@ -3,6 +3,7 @@ import { WINNERS_VALIDATED, MAIL_WINNERS } from '../Actions/winnerActions';
 
 const initialState = [];
 
+/** a part l'indentation tout va bien  */
 export const winnerReducer = (state = initialState, action) => {
   switch (action.type) {
     case MAIL_WINNERS:

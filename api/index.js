@@ -27,13 +27,6 @@ app.all('/*', function(req, res, next){
     }
 })
 
-let connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "<linuX>1990",
-    database: "breakfast"
-});
-
 //get all users, to, 
 app.get('/users', function(req, res) {
     connection.query("SELECT * FROM users", function (err, result) {
@@ -45,6 +38,11 @@ app.get('/users', function(req, res) {
 //create a new user
 app.post('/users', function (req, res) {
   const insert = `INSERT INTO users ( nom_prenom, email) values ('${req.body.nom_prenom}', '${req.body.email}')`
+  /** il y avait une erreur ici tu avais nommé "error" alors que ta callback a "err" en parametres 
+   * 
+   * Il faut bien comprendre comment fonctionne les callbacks et je te conseille le cours
+   * de graphikart sur le sujet des promises : https://www.grafikart.fr/tutoriels/promise-async-await-875
+   */
     connection.query(insert, function (err, result) {
           if(err) {
             console.log('mysql error', err);
@@ -82,7 +80,12 @@ app.post('/users', function (req, res) {
         console.log(err);
     }) 
   });    
-
+/**
+ * 
+ * Il faut que tu regardes comment gerer les erreurs avec des commandes comme "throw" et la classe "Error"
+ * en gros laisser des console.log() dans ton code c'est quelque chose qui ne faut pas faire 
+ * je te laisserai faire tes recherches 
+ */
 // send an email
   app.post('/send', (req, res) => {
     console.log('amazing!!')
@@ -94,19 +97,16 @@ app.post('/users', function (req, res) {
       subject: 'Sending Email using Node.js',
       text: 'That was easy!'
     };
-    
-    res.status(200);
-    res.end();
-    // transporter.sendMail(mailOptions, function(error, info){
-    //   if (error) {
-    //     console.log(error);
-    //     res.status(500);
-    //     res.send(error);
-    //   } else {
-    //     console.log('Email sent: ' + info.response);
-    //     res.send('Email sent: ' + info.response);
-    //   }
-    // }); 
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+        res.status(500);
+        res.send(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.send('Email sent: ' + info.response);
+      }
+    }); 
 })    
 
 // //Increment column /participation
